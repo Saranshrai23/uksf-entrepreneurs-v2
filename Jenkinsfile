@@ -171,8 +171,8 @@ pipeline {
                                     -p 8000:8000 \
                                     -e AWS_REGION="$AWS_REGION" \
                                     -e S3_BUCKET="$S3_BUCKET" \
-                                    -e APP_BASE_URL="$APP_BASE_URL" \
-                                    -e DATABASE_URL="postgresql://qradmin:${DB_PASSWORD}@${DB_HOST}:5432/uksf_dev" \
+                                    -e BASE_URL="$APP_BASE_URL" \
+                                    -e DATABASE_URL="postgresql+psycopg://qradmin:${DB_PASSWORD}@${DB_HOST}:5432/uksf_dev" \
                                     "$IMAGE"
 
 REMOTE
