@@ -10,3 +10,14 @@ app/generated_qr/*
 !app/uploads/photos/.gitkeep
 !app/uploads/logos/.gitkeep
 !app/generated_qr/.gitkeep
+.terraform/
+**/.terraform/
+*.tfstate
+*.tfstate.*
+
+# Terraform local files
+**/.terraform/*
+*.tfstate
+*.tfstate.*
+*.tfvars
+!*.tfvars.example
