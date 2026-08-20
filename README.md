@@ -57,8 +57,17 @@ pip install -r requirements-dev.txt
 export SECRET_KEY="$(python -c 'import secrets; print(secrets.token_urlsafe(48))')"
 export BASE_URL="http://localhost:8000"
 
+----
 python scripts/seed_profiles.py
 python scripts/create_admin.py --email admin@example.com --password 'ChangeThis123!'
+or
+python -m scripts.seed_profiles
+
+PYTHONPATH=. python scripts/create_admin.py \
+  --email saranshrai07@gmail.com \
+  --password 'password'
+----
+
 uvicorn app.main:app --reload
 ```
 
