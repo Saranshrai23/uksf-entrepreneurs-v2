@@ -1,0 +1,7 @@
+{% extends "base.html" %}{% block title %}Register{% endblock %}
+{% block content %}<main class="form-shell"><div class="form-card"><h1>Create account</h1><p class="muted">New members can register and submit a profile for admin approval. Owners of existing profiles can register first and then ask the admin to assign the existing profile to their account.</p>
+<form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+<div class="field"><label>Email</label><input class="input" type="email" name="email" required></div>
+<div class="row"><div class="field"><label>Password</label><input class="input" type="password" name="password" minlength="10" required><div class="help">Minimum 10 characters.</div></div>
+<div class="field"><label>Confirm password</label><input class="input" type="password" name="confirm_password" minlength="10" required></div></div>
+<button class="btn primary" type="submit">Register</button></form></div></main>{% endblock %}

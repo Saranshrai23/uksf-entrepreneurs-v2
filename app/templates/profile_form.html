@@ -1,0 +1,14 @@
+{% extends "base.html" %}{% block title %}{{ 'Create' if mode == 'create' else 'Edit' }} Profile{% endblock %}
+{% block content %}<main class="form-shell"><div class="form-card"><div class="kicker">Standard Profile Template</div><h1>{{ 'Create Your Profile' if mode == 'create' else 'Edit Your Profile' }}</h1>
+<p class="muted">Use only accurate information. Missing optional fields can remain blank. New profiles require admin approval before they become public.</p>
+<form method="post" enctype="multipart/form-data" action="{{ '/profile/new' if mode == 'create' else '/profile/edit' }}"><input type="hidden" name="csrf_token" value="{{ csrf_token }}">
+<div class="field"><label>Name *</label><input class="input" name="name" required value="{{ profile.name if profile else '' }}"></div>
+<div class="row"><div class="field"><label>Designation</label><input class="input" name="designation" value="{{ profile.designation if profile else '' }}"></div><div class="field"><label>Company / Business</label><input class="input" name="company" value="{{ profile.company if profile else '' }}"></div></div>
+<div class="row"><div class="field"><label>Location</label><input class="input" name="location" value="{{ profile.location if profile else '' }}"></div><div class="field"><label>Public Email</label><input class="input" type="email" name="email" value="{{ profile.email if profile else '' }}"></div></div>
+<div class="field"><label>About</label><textarea name="about">{{ profile.about if profile else '' }}</textarea></div>
+<div class="field"><label>Business Category</label><input class="input" name="category" value="{{ profile.category if profile else '' }}"></div>
+<div class="field"><label>Services</label><textarea name="services" placeholder="One service per line">{{ services_text }}</textarea><div class="help">Enter one service/capability per line.</div></div>
+<div class="row"><div class="field"><label>Website</label><input class="input" type="url" name="website" placeholder="https://..." value="{{ profile.website if profile else '' }}"></div><div class="field"><label>LinkedIn</label><input class="input" type="url" name="linkedin" placeholder="https://www.linkedin.com/in/..." value="{{ profile.linkedin if profile else '' }}"></div></div>
+<div class="row"><div class="field"><label>Person Photo</label><input class="input" type="file" name="photo" accept="image/jpeg,image/png,image/webp"><div class="help">JPG, PNG or WEBP; max 5 MB.</div></div><div class="field"><label>Business Logo</label><input class="input" type="file" name="logo" accept="image/jpeg,image/png,image/webp"><div class="help">Placeholder is used if no logo is uploaded.</div></div></div>
+<button class="btn primary" type="submit">{{ 'Submit for Approval' if mode == 'create' else 'Save Changes' }}</button> <a class="btn" href="/dashboard">Cancel</a>
+</form></div></main>{% endblock %}

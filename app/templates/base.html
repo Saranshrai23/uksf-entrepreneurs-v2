@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>{% block title %}Entrepreneur Digital Profiles{% endblock %}</title>
+  <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="/">Entrepreneur Digital Profiles</a>
+    <div class="nav-links">
+      <a href="/">Directory</a>
+      {% if current_user %}
+        {% if current_user.role == 'admin' %}<a href="/admin">Admin</a>{% else %}<a href="/dashboard">Dashboard</a>{% endif %}
+        <form class="inline" method="post" action="/logout"><input type="hidden" name="csrf_token" value="{{ csrf_token }}"><button class="btn" type="submit">Logout</button></form>
+      {% else %}
+        <a href="/login">Login</a><a class="btn primary" href="/register">Register</a>
+      {% endif %}
+    </div>
+  </div>
+</nav>
+<div class="container">
+  {% if flash %}<div class="flash {{ flash.kind }}">{{ flash.message }}</div>{% endif %}
+</div>
+{% block content %}{% endblock %}
+<footer class="footer">Entrepreneur Digital Profile & QR Code System</footer>
+</body>
+</html>

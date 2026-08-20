@@ -1,0 +1,12 @@
+{% extends "base.html" %}{% block title %}My Dashboard{% endblock %}
+{% block content %}<main class="form-shell"><div class="form-card"><div class="kicker">User Dashboard</div><h1>My Profile</h1>
+{% if profile %}
+<p><span class="status {{ profile.status }}">{{ profile.status }}</span></p>
+<h2>{{ profile.name }}</h2><p class="muted">{{ profile.designation }}{% if profile.company %} · {{ profile.company }}{% endif %}</p>
+{% if profile.status == 'rejected' %}<div class="flash error"><strong>Rejected:</strong> {{ profile.rejection_reason or 'Please update the profile and submit again.' }}</div>{% endif %}
+<div class="actions"><a class="btn primary" href="/profile/edit">Edit My Profile</a>{% if profile.status == 'published' %}<a class="btn" target="_blank" href="/profiles/{{ profile.slug }}">View Public Profile</a><a class="btn" target="_blank" href="/qr/{{ profile.slug }}.png">Open QR</a>{% endif %}</div>
+<p class="small muted" style="margin-top:18px">Your profile URL stays fixed even when you update your photo, company information, email, services or LinkedIn link.</p>
+{% else %}
+<p class="muted">No profile is assigned to this account yet.</p><div class="actions"><a class="btn primary" href="/profile/new">Create New Profile</a></div>
+<p class="small muted" style="margin-top:18px">If your profile already exists in the directory, do not create a duplicate. Ask the admin to assign that existing profile to your registered email.</p>
+{% endif %}</div></main>{% endblock %}

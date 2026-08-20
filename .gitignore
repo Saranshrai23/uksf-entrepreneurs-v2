@@ -1,0 +1,12 @@
+.venv/
+__pycache__/
+*.pyc
+*.db
+.env
+.pytest_cache/
+app/uploads/photos/*
+app/uploads/logos/*
+app/generated_qr/*
+!app/uploads/photos/.gitkeep
+!app/uploads/logos/.gitkeep
+!app/generated_qr/.gitkeep

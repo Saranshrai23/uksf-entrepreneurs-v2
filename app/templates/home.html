@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Entrepreneur Directory{% endblock %}
+{% block content %}
+<section class="hero"><div class="container">
+  <div class="kicker">Public Directory</div><h1>Entrepreneur Profiles</h1>
+  <p>Every published entrepreneur has one reusable profile template and a permanent URL that can be encoded in a QR code.</p>
+  <form class="search" method="get"><input class="input" name="q" value="{{ q }}" placeholder="Search name, company, role or location"><button class="btn primary">Search</button></form>
+</div></section>
+<div class="container"><div class="grid">
+{% for p in profiles %}
+<a class="card" href="/profiles/{{ p.slug }}"><h3>{{ p.name }}</h3><div class="muted">{{ p.designation }}</div><div>{{ p.company }}</div>{% if p.location %}<div class="small muted" style="margin-top:8px">{{ p.location }}</div>{% endif %}</a>
+{% else %}<div class="empty">No published profiles found.</div>{% endfor %}
+</div></div>
+{% endblock %}
