@@ -9,8 +9,8 @@ from fastapi import HTTPException, UploadFile
 from sqlalchemy import select
 from sqlalchemy.orm import Session
 
-from .config import ALLOWED_IMAGE_TYPES, BASE_URL, LOGO_DIR, MAX_UPLOAD_BYTES, PHOTO_DIR, QR_DIR
-from .models import Profile
+from ..config import ALLOWED_IMAGE_TYPES, BASE_URL, LOGO_DIR, MAX_UPLOAD_BYTES, PHOTO_DIR, QR_DIR
+from ..models import Profile
 
 
 def slugify(value: str) -> str:
