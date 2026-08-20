@@ -463,3 +463,35 @@ def assign_profile_owner(
     db.commit()
     flash(request, f"{profile.name} is now assigned to {user.email}.", "success")
     return redirect("/admin")
+
+
+@app.post("/admin/profiles/{profile_id}/delete")
+def delete_profile(
+    profile_id: int,
+    request: Request,
+    csrf_token: Annotated[str, Form()],
+    db: Session = Depends(get_db),
+):
+    verify_csrf(request, csrf_token)
+    require_admin(db, request)
+
+    profile = db.get(Profile, profile_id)
+
+    if not profile:
+        raise HTTPException(status_code=404, detail="Profile not found")
+
+    name = profile.name
+
+    if profile.photo_filename:
+        (UPLOAD_DIR / "photos" / profile.photo_filename).unlink(missing_ok=True)
+
+    if profile.logo_filename:
+        (UPLOAD_DIR / "logos" / profile.logo_filename).unlink(missing_ok=True)
+
+    (QR_DIR / f"{profile.slug}.png").unlink(missing_ok=True)
+
+    db.delete(profile)
+    db.commit()
+
+    flash(request, f"{name} deleted successfully.", "success")
+    return redirect("/admin")
